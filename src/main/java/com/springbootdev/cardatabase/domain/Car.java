@@ -34,7 +34,7 @@ public class Car {
 	
 	
 
-	public Car(String brand, String model, String color, String registerNumber, int price, int year) {
+	public Car(String brand, String model, String color, String registerNumber, int price, int year, Owner owner) {
 		super();
 		this.brand = brand;
 		this.model = model;
@@ -42,6 +42,7 @@ public class Car {
 		this.registerNumber = registerNumber;
 		this.price = price;
 		this.year = year;
+		this.owner = owner;
 	}
 
 	

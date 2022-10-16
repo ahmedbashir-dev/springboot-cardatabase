@@ -17,7 +17,7 @@ import com.springbootdev.cardatabase.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
+public class SecurityConfig {
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
 	
@@ -28,11 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		
 	}
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception{
-		
-	}
-	
+//	
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception{
+//		
+//	}
+//	
 	
 }

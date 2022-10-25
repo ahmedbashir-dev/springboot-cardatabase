@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.springbootdev.cardatabase.service.UserDetailsServiceImpl;
 
@@ -23,6 +25,9 @@ import com.springbootdev.cardatabase.service.UserDetailsServiceImpl;
 public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 	@Autowired
 	private UserDetailsServiceImpl userDetailsService;
+	
+	@Autowired
+	private AuthenticationFilter authenticationFilter;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
@@ -48,7 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 		.antMatchers(HttpMethod.POST, "/login")
 		.permitAll()
 		.anyRequest()
-		.authenticated();
+		.authenticated()
+		.and()
+		.addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
 	}
 	
 	@Bean
